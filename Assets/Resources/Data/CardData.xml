@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCardData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CardData ID="0" name="기본 타워 카드" type="0" path="Towers/attackTower"/>
+  <CardData ID="1" name="지원 타워 카드" type="0" path="Towers/bufferTower"/>
+  <CardData ID="2" name="돌 타워 카드" type="0" path="Towers/stoneTower"/>
+</ArrayOfCardData>
