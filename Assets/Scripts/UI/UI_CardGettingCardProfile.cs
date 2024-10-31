@@ -12,12 +12,14 @@ public class UI_CardGettingCardProfile : UI_Base
 {
     enum Texts
     {
-        CardTitleText
+        CardTitleText,
+        CardDesText
     }
 
     enum Buttons
     {
-        CardUseButton
+        CardUseButton,
+        Image
     }
 
     [SerializeField]
@@ -37,6 +39,8 @@ public class UI_CardGettingCardProfile : UI_Base
         // delay 시간만큼 대기한 후 애니메이션 실행
 		Debug.Log("anim: " + delay);
         Invoke("Animate", delay);
+
+        Debug.Log(Resources.LoadAll<Sprite>("Cards/").Length);
     }
 
     public override bool Init()
@@ -63,7 +67,12 @@ public class UI_CardGettingCardProfile : UI_Base
     void RefreshUI()
     {
         GetText((int)Texts.CardTitleText).text = Managers.Data.Cards[(int)_cardID].name.ToString();
+        GetText((int)Texts.CardDesText).text = Managers.Data.Cards[(int)_cardID].description.ToString();
+
         GetButton((int)Buttons.CardUseButton).gameObject.BindEvent(OnClickCardButton);
+        GetButton((int)Buttons.CardUseButton).gameObject.GetComponent<Image>().sprite = Resources.LoadAll<Sprite>("Cards/")[Managers.Data.Cards[(int)_cardID].rank+1];
+
+        GetButton((int)Buttons.Image).gameObject.GetComponent<Image>().sprite = Resources.Load<GameObject>("Prefabs/"+ Managers.Data.Cards[(int)_cardID].path).GetComponent<SpriteRenderer>().sprite;
     }
 
     void OnClickCardButton()

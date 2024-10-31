@@ -32,6 +32,8 @@ public class RoomNetworkManager : MonoBehaviourPunCallbacks
     [PunRPC]
     void start_game()
     {
+        UI_GamePopup gamePopup = FindObjectOfType<UI_GamePopup>();
+        gamePopup.fucking_just_change_text_I_hate_it();
         Managers.UI.ShowPopupUI<UI_CardGettingPopup>();
     }
 

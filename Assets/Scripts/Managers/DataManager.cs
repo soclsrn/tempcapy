@@ -18,6 +18,10 @@ public class CardData
 	public int type;
 	[XmlAttribute]
 	public string path;
+    [XmlAttribute]
+    public string description;
+    [XmlAttribute]
+    public int rank;
 }
 
 [Serializable, XmlRoot("ArrayOfCardData")]

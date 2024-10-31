@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfCardData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <CardData ID="0" name="기본 타워 카드" type="0" path="Towers/attackTower"/>
-  <CardData ID="1" name="지원 타워 카드" type="0" path="Towers/bufferTower"/>
-  <CardData ID="2" name="돌 타워 카드" type="0" path="Towers/stoneTower"/>
+  <CardData ID="0" name="기본 타워 카드" type="0" path="Towers/attackTower" description="기본적인 총알을 발사하는 타워입니다." rank="0"/>
+  <CardData ID="1" name="지원 타워 카드" type="0" path="Towers/bufferTower" description="가장 일반적인 지원 타워입니다." rank="1"/>
+  <CardData ID="2" name="돌 타워 카드" type="0" path="Towers/stoneTower" description="육중한 돌을 던지는 듬직한 타워입니다." rank="2"/>
 </ArrayOfCardData>

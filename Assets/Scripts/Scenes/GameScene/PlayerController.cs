@@ -1,127 +1,91 @@
+using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
 using Photon.Realtime;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float dashSpeed = 20f;
-    public float dashDuration = 0.2f;
-    public float dashCooldown = 1f;
-    public float dashDistance = 3f;
-    public float clickMoveThreshold = 0.1f;
+    public Camera Map_cam;
+    public float moveSpeed = 5f; // 기본 이동 속도
+    public float dashDistance = 2f; // 대쉬 거리
+    public float dashCooldown = 1f; // 대쉬 쿨타임
+    private bool canDash = true;
+    public bool canMove = true;
     public PhotonView pv;
 
-    private Vector2 targetPosition;
     private Rigidbody2D rb;
-    private bool isDashing;
-    private float dashTimeLeft;
-    private float lastDashTime;
-    private bool isMoving;
-    private Queue<Vector2> pathQueue = new Queue<Vector2>();
-    void Start()
+    private Vector2 moveInput;
+    private Vector2 moveVelocity;
+
+
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        targetPosition = rb.position;
+        Map_cam = FindAnyObjectByType<Camera>();
     }
 
-    void Update()
+    private void Update()
     {
         if (pv.IsMine)
         {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            SetNewTarget(mousePosition);
-
-            //대시
-            if (Input.GetMouseButtonDown(0) && Time.time >= lastDashTime + dashCooldown)
+            // 이동 입력 받기
+            moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            moveInput.Normalize(); // 대각선 이동 속도 일정하게
+            if (canMove)
             {
-                StartDash(mousePosition);
-            }
+                moveVelocity = moveInput * moveSpeed;
 
-            Vector2 lookDir = mousePosition - rb.position;
-            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-            rb.rotation = angle;
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (isDashing)
-        {
-            ContinueDash();
-        }
-        else if (isMoving)
-        {
-            MoveToTarget();
-        }
-    }
-
-    void SetNewTarget(Vector2 newTarget)
-    {
-        targetPosition = newTarget;
-        isMoving = true;
-        pathQueue.Clear();
-        pathQueue.Enqueue(targetPosition);
-    }
-
-    void MoveToTarget()
-    {
-        if (pathQueue.Count > 0)
-        {
-            Vector2 currentTarget = pathQueue.Peek();
-            
-            if (Vector2.Distance(rb.position, currentTarget) < clickMoveThreshold)
-            {
-                pathQueue.Dequeue();
-                if (pathQueue.Count == 0)
+                if (Input.GetKeyDown(KeyCode.LeftShift) && canDash) // 대쉬 입력 감지
                 {
-                    isMoving = false;
+                    Debug.Log("dash");
+                    StartCoroutine(Dash());
                 }
-
-                return;
             }
-            
-            Vector2 direction = (currentTarget - rb.position).normalized;
-            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
         }
     }
 
-    void StartDash(Vector2 dashTarget)
+    private void FixedUpdate()
     {
-        isDashing = true;
-        dashTimeLeft = dashDuration;
-        lastDashTime = Time.time;
-
-        Vector2 dashDirection = (dashTarget - rb.position).normalized;
-        targetPosition = rb.position + dashDirection * Mathf.Min(dashDistance, Vector2.Distance(rb.position, dashTarget));
+        rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
     }
 
-    void ContinueDash()
+    public void Cam_setting(bool IsMove)
     {
-        if (dashTimeLeft > 0)
+        canMove = IsMove;
+        if (IsMove)
         {
-            Vector2 dashDirection = (targetPosition - rb.position).normalized;
-            float distanceThisFrame = dashSpeed * Time.fixedDeltaTime;
-            
-            if (Vector2.Distance(rb.position, targetPosition) <= distanceThisFrame)
-            {
-                rb.MovePosition(targetPosition);
-                isDashing = false;
-            }
-            else
-            {
-                rb.MovePosition(rb.position + dashDirection * distanceThisFrame);
-            }
-
-            dashTimeLeft -= Time.fixedDeltaTime;
+            Map_cam.DOOrthoSize(4f, 1f);
+            Map_cam.GetComponent<CameraControler>().moveCam = true;
         }
         else
         {
-            isDashing = false;
+            Map_cam.DOOrthoSize(10f, 1f);
+            Map_cam.GetComponent<CameraControler>().moveCam = false;
         }
     }
+    private IEnumerator Dash()
+    {
+        canDash = false;
 
-    
+        // 텔레포트 전 작아지는 애니메이션
+        transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InOutQuad);
+        transform.DORotate(new Vector3(0, 0, 360), 1f, RotateMode.WorldAxisAdd);//.SetLoops(-1, LoopType.Incremental);
+
+        yield return new WaitForSeconds(0.1f);
+
+        // 텔레포트 위치 계산
+        Vector2 dashPosition = new Vector2(transform.position.x, transform.position.y) + moveInput * dashDistance;
+
+        // 플레이어 위치를 목표 위치로 순간 이동
+        transform.position = dashPosition;
+
+        // 텔레포트 후 커지는 애니메이션
+        transform.DOScale(new Vector3(0.53f, 0.53f, 0.53f), 0.2f).SetEase(Ease.OutBack);
+        yield return new WaitForSeconds(0.2f);
+
+        // 쿨타임
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
 }

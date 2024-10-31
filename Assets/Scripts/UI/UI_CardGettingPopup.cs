@@ -21,7 +21,8 @@ public class UI_CardGettingPopup : UI_Popup
 		if (base.Init() == false)
 			return false;
 
-		BindText(typeof(Texts));
+        SetPlayersMove(false);
+        BindText(typeof(Texts));
 		BindButton(typeof(Buttons)); 
 
 		// 카드 3개 생성
@@ -37,12 +38,13 @@ public class UI_CardGettingPopup : UI_Popup
 			card.Setting(this, type, (float)i * 0.1f);
 			
 			// 카드의 위치 조정
-			card.transform.position += new Vector3((i - 1) * 500, 0, 0); 
+			card.transform.position += new Vector3((i - 1) * 800, 0, 0); 
 		}
 
 		// 타이틀 텍스트 설정
 		GetText((int)Texts.TitleText).text = "카드를 선택하세요.";
 
+		
 		return true;
 	}
 
@@ -79,4 +81,12 @@ public class UI_CardGettingPopup : UI_Popup
 	public void closePopupUI(){
 		Managers.UI.ClosePopupUI(this);
 	}
+
+	void SetPlayersMove(bool moveable)
+	{
+        foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            p.GetComponent<PlayerController>().Cam_setting(moveable);
+        }
+    }
 }

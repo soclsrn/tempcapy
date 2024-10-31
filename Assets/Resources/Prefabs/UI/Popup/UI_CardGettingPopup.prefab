@@ -32,10 +32,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7431158543796252735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1058.9253, y: 779}
-  m_SizeDelta: {x: 1591.206, y: 441.209}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1658.5555, y: -341.6692}
+  m_SizeDelta: {x: 2734.016, y: 174.548}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2819523928842991932
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCE74\uB4DC \uC120\uD0DD\uD558\uAE30"
+  m_text: "[\u314B\u3137\u3145\u314C]"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 47d32e36e15854844b1550b345d85f70, type: 2}
   m_sharedMaterial: {fileID: -5523755308731436709, guid: 47d32e36e15854844b1550b345d85f70, type: 2}
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 211.53
-  m_fontSizeBase: 211.53
+  m_fontSize: 141.34
+  m_fontSizeBase: 141.34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -79,7 +79,7 @@ public class UI_GamePopup : UI_Popup
         if (PhotonNetwork.IsMasterClient)
         {
             RectTransform startButtonRectTransform = GetButton((int)Buttons.start_button).GetComponent<RectTransform>();
-            startButtonRectTransform.DOAnchorPos(new Vector2(2847f, 982.09f), 1.5f).SetEase(Ease.InOutQuad);
+            startButtonRectTransform.DOAnchorPos(new Vector2(2989f, 798.2072f), 1.5f).SetEase(Ease.InOutQuad);
         }
     }
     public void ready()
@@ -89,7 +89,7 @@ public class UI_GamePopup : UI_Popup
         if (PhotonNetwork.IsMasterClient)
 		{
             RectTransform startButtonRectTransform = GetButton((int)Buttons.start_button).GetComponent<RectTransform>();
-            startButtonRectTransform.DOAnchorPos(new Vector2(1579.9f, 982.09f), 1.5f).SetEase(Ease.InOutQuad);
+            startButtonRectTransform.DOAnchorPos(new Vector2(1435.285f, 798.2072f), 1.5f).SetEase(Ease.InOutQuad);
         }
     }
  //   void changeImageAlpha(float a , float img)
@@ -121,9 +121,8 @@ public class UI_GamePopup : UI_Popup
 		{
             RoomNetworkManager roomNetworkManager = FindObjectOfType<RoomNetworkManager>();
             roomNetworkManager.press_start_button();
-            GetText((int)Texts.wait_player).text = "";
             RectTransform startButtonRectTransform = GetButton((int)Buttons.start_button).GetComponent<RectTransform>();
-            startButtonRectTransform.DOAnchorPos(new Vector2(2847f, 982.09f), 1.5f).SetEase(Ease.InOutQuad);
+            startButtonRectTransform.DOAnchorPos(new Vector2(2989f, 798.2072f), 1.5f).SetEase(Ease.InOutQuad);
             can_start = false;
         }
 	}
@@ -174,4 +173,9 @@ public class UI_GamePopup : UI_Popup
 		Debug.Log("OnClickCollectionButton");
 		// Managers.UI.ShowPopupUI<UI_CollectionPopup>();
 	}
+
+    public void fucking_just_change_text_I_hate_it()
+	{
+        GetText((int)Texts.wait_player).text = "";
+    }
 }

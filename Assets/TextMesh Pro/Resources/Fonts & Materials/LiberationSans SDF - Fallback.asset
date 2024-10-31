@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: LiberationSans SDF - Fallback 1
+  m_Name: LiberationSans SDF - Fallback
   m_EditorClassIdentifier: 
   hashCode: -1699145518
   material: {fileID: 2180264}
@@ -209,6 +209,21 @@ MonoBehaviour:
       m_Y: 0
       m_Width: 0
       m_Height: 0
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 17
+    m_Metrics:
+      m_Width: 10
+      m_Height: 9
+      m_HorizontalBearingX: 7
+      m_HorizontalBearingY: 9
+      m_HorizontalAdvance: 24
+    m_GlyphRect:
+      m_X: 10
+      m_Y: 113
+      m_Width: 10
+      m_Height: 9
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
@@ -413,6 +428,10 @@ MonoBehaviour:
     m_GlyphIndex: 3
     m_Scale: 1
   - m_ElementType: 1
+    m_Unicode: 46
+    m_GlyphIndex: 17
+    m_Scale: 1
+  - m_ElementType: 1
     m_Unicode: 66
     m_GlyphIndex: 37
     m_Scale: 1
@@ -522,15 +541,15 @@ MonoBehaviour:
     m_Y: 90
     m_Width: 59
     m_Height: 81
+  - m_X: 0
+    m_Y: 103
+    m_Width: 29
+    m_Height: 28
   m_FreeGlyphRects:
   - m_X: 466
     m_Y: 0
     m_Width: 45
     m_Height: 511
-  - m_X: 0
-    m_Y: 103
-    m_Width: 42
-    m_Height: 408
   - m_X: 279
     m_Y: 65
     m_Width: 57
@@ -571,14 +590,22 @@ MonoBehaviour:
     m_Y: 144
     m_Width: 382
     m_Height: 367
-  - m_X: 0
-    m_Y: 109
-    m_Width: 70
-    m_Height: 402
   - m_X: 129
     m_Y: 90
     m_Width: 11
     m_Height: 421
+  - m_X: 29
+    m_Y: 103
+    m_Width: 13
+    m_Height: 408
+  - m_X: 0
+    m_Y: 131
+    m_Width: 70
+    m_Height: 380
+  - m_X: 29
+    m_Y: 109
+    m_Width: 41
+    m_Height: 402
   m_fontInfo:
     Name: Liberation Sans
     PointSize: 86
